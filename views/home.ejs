@@ -32,8 +32,8 @@
                             <% }) %>
                                 <% } %>
                 </div>
-                <button class="nav prev" onclick="prevSlide()">❮</button>
-                <button class="nav next" onclick="nextSlide()">❯</button>
+                <button class="nav prev">❮</button>
+                <button class="nav next">❯</button>
             </div>
 
             <!-- Gündem Haberleri -->
@@ -43,9 +43,9 @@
                         <% if (category==="Gündem" ) { %>
                             <% newsList.slice(0, 3).forEach(newsItem=> { %> <!-- Show only 3 items -->
                                 <article class="gundem-card">
-                                    
-                                    <img src="<%= newsItem.image_url || 'https://picsum.photos/400/200' %>"
-                                        alt="<%= newsItem.title %>">
+
+                                    <img class="news-image" src="<%= newsItem.image_url%>" alt="<%= newsItem.title %>"
+                                        data-category="<%= newsItem.category %>">
                                     <div class="card-content">
                                         <h3>
                                             <%= newsItem.title %>
@@ -82,11 +82,10 @@
                     </div>
                     <div class="news-grid">
                         <% newsList.forEach(newsItem=> { %>
-
                             <article class="news-card">
-                                <a class="bridge" href="<%= newsItem.link%>" target="_blank">
-                                    <img src="<%= newsItem.image_url || 'https://picsum.photos/300/200' %>"
-                                        alt="<%= newsItem.title %>">
+                                <a class="bridge" href="<%= newsItem.link %>" target="_blank">
+                                    <img class="news-image" src="<%= newsItem.image_url%>" alt="<%= newsItem.title %>"
+                                        data-category="<%= newsItem.category %>">
                                     <div class="card-content1">
                                         <div class="news-meta">
                                             <span>
@@ -104,7 +103,7 @@
                                             <%= (newsItem.content || "Açıklama yok." ).substring(0, 100) + "..." %>
                                         </p>
                                         <div class="card-footer">
-                                            <a href="<%= newsItem.link%>" target="_blank" class="read-more-btn">
+                                            <a href="<%= newsItem.link %>" target="_blank" class="read-more-btn">
                                                 Devamını Oku
                                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg">

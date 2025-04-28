@@ -1,12 +1,14 @@
 const express = require("express");
 const expressLayout = require("express-ejs-layouts");
 const methodOverride = require("method-override");
+var compression = require('compression')
+var helmet = require('helmet')
 const { connectDB, News } = require("./services/mongoService");  // MongoDB servisini içe aktar
 const { getWeatherData } = require("./services/weatherService");  // Hava durumu servisini içe aktar
 
 const app = express();
 const PORT = process.env.PORT || 7000;
-;
+
 
 // MongoDB bağlantısı
 connectDB();
@@ -17,6 +19,17 @@ app.use(expressLayout);
 app.set("layout", "./layouts/main");
 app.set("view engine", "ejs");
 require("dotenv").config();
+app.use(
+    helmet.contentSecurityPolicy({
+      directives: {
+        defaultSrc: ["'self'"],  // Varsayılan olarak yalnızca aynı kaynak
+        imgSrc: ["*"],  // Tüm kaynaklardan resim yüklemeye izin ver
+        // Diğer direktifler...
+      }
+    })
+  );
+app.use(compression())
+
 
 // Kategori ve haber sayıları
 const categoryLimits = {
@@ -32,13 +45,7 @@ const categoryLimits = {
 app.get("/", async (req, res) => {
     try {
         const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
-
-        // Hava durumu verisini çekmek için servis kullanıyoruz
-        
         const weatherData = await getWeatherData(ip);
-        console.log(weatherData,ip);
-
-
         // Kategorize edilmiş haberleri çekmek için MongoDB servisini kullanıyoruz
         const categorizedNews = {};
         const categoryPromises = Object.entries(categoryLimits).map(async ([category, limit]) => {

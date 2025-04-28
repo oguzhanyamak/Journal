@@ -592,6 +592,12 @@ header {
     position: relative;
 }
 
+/* styles.css */
+.black-text {
+    color: black;
+  }
+  
+
 /* === RESPONSIVE === */
 @media (max-width: 1200px) {
     header, main, footer {
