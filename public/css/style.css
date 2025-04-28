@@ -542,6 +542,56 @@ header {
     width: 100%;
     margin: 0 auto;
 }
+/* SOSYAL MEDYA LİNKLERİ */
+.social-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    margin: 1.5rem 0;
+}
+
+.social-link {
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.social-link--bluesky {
+    background: white;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    padding: 10px; 
+}
+
+.social-link--bluesky svg {
+    width: 24px;
+    height: 24px;
+    fill: #1185FE;
+    transition: all 0.3s ease;
+}
+
+.social-link--bluesky:hover {
+    transform: translateY(-3px) scale(1.05);
+    background: #f0f7ff;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.social-link--bluesky:hover svg {
+    fill: #0d6fd8;
+    transform: scale(1.1);
+}
+
+.social-link .fa-twitter {
+    color: #1DA1F2;
+    font-size: 22px;
+}
+
+.social-link:hover .fa-twitter {
+    color: #1a8cd8;
+}
 
 /* === HAVA DURUMU === */
 .weather-clock {
