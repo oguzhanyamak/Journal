@@ -84,7 +84,7 @@ header {
 
 .bridge{
     text-decoration: none;
-    color: inherit; /* veya istediğin bir renk */
+    color: inherit;
 }
 
 .section-divider {
@@ -110,8 +110,8 @@ header {
     overflow: hidden;
     border-radius: var(--border-radius);
     box-shadow: var(--shadow-md);
-    flex: 0 0 60%; /* Set carousel to take up 60% of the width */
-    height: 650px; /* Set a fixed height */
+    height: 650px; 
+    flex: 0 0 calc(60% - 1rem);
 }
 
 .carousel {
@@ -219,7 +219,6 @@ header {
 .prev { left: 2rem; }
 .next { right: 2rem; }
 
-/* === GÜNDEM HABERLERİ === */
 /* Ana container düzenlemesi */
 .flex.ai-stretch {
     align-items: stretch;
@@ -227,23 +226,21 @@ header {
     
 }
 
-/* Carousel düzenlemesi */
 .slider-container {
     position: relative;
     overflow: hidden;
     border-radius: var(--border-radius);
     box-shadow: var(--shadow-md);
     flex: 0 0 60%;
-    height: 100%; /* Container yüksekliğini tam kullan */
+    height: 100%; 
     margin-bottom: 80px;
 }
 
-/* Gündem container düzenlemesi */
 .gundem-container {
     display: flex;
     gap: 2rem;
-    flex: 0 0 38%; /* %2 boşluk bırakmak için 38% yaptık */
-    height: 100%; /* Container yüksekliğini tam kullan */
+    flex: 0 0 calc(40% - 1rem);
+    height: 100%;
 }
 
 .gundem-grid {
@@ -251,11 +248,10 @@ header {
     flex-direction: column;
     gap: 2.4rem;
     flex: 1;
-    height: 100%; /* Container yüksekliğini tam kullan */
+    height: 100%; 
     overflow-y: auto;
 }
 
-/* Gündem kartlarını daha büyük yapalım */
 .gundem-card {
     display: flex;
     background: #fff;
@@ -263,8 +259,8 @@ header {
     overflow: hidden;
     box-shadow: var(--shadow-sm);
     transition: var(--transition);
-    height: 250px; /* Kart yüksekliğini artırdık */
-    max-width: 100%; /* Maksimum genişlik */
+    height: 250px;
+    max-width: 100%;
 }
 
 .gundem-card:hover {
@@ -273,14 +269,14 @@ header {
 }
 
 .gundem-card img {
-    width: 40%; /* Resim genişliğini artırdık */
+    width: 40%; 
     height: 100%;
     object-fit: cover;
 }
 
 .card-content {
     padding: 1.5rem;
-    width: 60%; /* İçerik genişliğinibir dur bir tane not defteri açar mısın  ayarladık */
+    width: 60%; 
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -322,7 +318,7 @@ header {
 .gundem-card h3 {
     font-family: var(--font-primary);
     font-weight: 600;
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     line-height: 1.4;
     letter-spacing: -0.1px;
     color: var(--text-dark);
@@ -332,7 +328,7 @@ header {
 .news-meta {
     display: flex;
     gap: 0.8rem;
-    font-size: 1.2rem;
+    font-size: 1rem;
     color: var(--text-light);
     font-family: var(--font-primary);
     flex-shrink: 0;
@@ -342,6 +338,7 @@ header {
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    font-size: 0.9rem;
 }
 
 .news-meta i {
@@ -391,6 +388,56 @@ header {
     font-size: 1.5rem;
     color: var(--text-light);
 }
+.gundem-card .news-link {
+    display: block;
+    text-decoration: none; 
+    color: inherit;
+}
+
+.gundem-card .card-content {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center; 
+    width: 100%; 
+}
+
+.gundem-card .text-container {
+    flex: 1;
+    padding-right: 15px; 
+}
+
+.gundem-card .news-image {
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
+    margin: 0; 
+    padding: 0; 
+}
+
+.gundem-card .image-container {
+    padding: 0; 
+    margin: 0; 
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+}
+
+.gundem-card .card-content h3 {
+    font-size: 16px; 
+}
+
+.gundem-card .news-meta {
+    font-size: 12px; 
+    color: gray; 
+}
+
+.gundem-card .news-image {
+    margin-top: 1px;
+}
+
+.gundem-card .news-link:hover {
+    background-color: rgba(0, 0, 0, 0.1); 
+}
 
 .news-meta {
     display: flex;
@@ -434,7 +481,7 @@ header {
 .card-content1 {
     position: relative;
     padding: 1.5rem;
-    height: 100%; /* Kart içeriğinin resimlere yüksekliğini tam kullan */
+    height: 100%; 
     display: flex;
     flex-direction: column;
 }
@@ -442,13 +489,13 @@ header {
 .news-card {
     display: flex;
     flex-direction: column;
-    height: 100%; /* Kartın yüksekliğini tam kullan */
+    height: 100%;
 }
 
 .card-footer {
-    margin-top: auto; /* Footer'ı içeriğin en altına it */
+    margin-top: auto; 
     display: flex;
-    justify-content: flex-end; /* Sağa hizala */
+    justify-content: flex-end; 
     padding-top: 1rem;
 }
 
@@ -542,55 +589,58 @@ header {
     width: 100%;
     margin: 0 auto;
 }
-/* SOSYAL MEDYA LİNKLERİ */
 .social-links {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-wrap: wrap;
     gap: 1.5rem;
     margin: 1.5rem 0;
 }
 
 .social-link {
+    display: flex;
     align-items: center;
     justify-content: center;
     width: 44px;
     height: 44px;
     border-radius: 50%;
+    background: white; 
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); 
     transition: all 0.3s ease;
+    padding: 10px;
+    text-decoration: none;
 }
 
-.social-link--bluesky {
-    background: white;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    padding: 10px; 
-}
-
-.social-link--bluesky svg {
-    width: 24px;
-    height: 24px;
-    fill: #1185FE;
-    transition: all 0.3s ease;
-}
-
-.social-link--bluesky:hover {
+.social-link:hover {
     transform: translateY(-3px) scale(1.05);
     background: #f0f7ff;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-}
-
-.social-link--bluesky:hover svg {
-    fill: #0d6fd8;
-    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .social-link .fa-twitter {
-    color: #1DA1F2;
-    font-size: 22px;
+    color: var(--primary-color);
+    font-size: 1.4rem;
+    transition: color 0.3s ease, transform 0.3s ease;
+
 }
 
 .social-link:hover .fa-twitter {
-    color: #1a8cd8;
+    color:var(--primary-color);
+    transform: scale(1.1);
+}
+
+
+.social-link--bluesky svg {
+    width: 1.4rem;
+    height: 1.4rem;
+    fill: var(--primary-color);
+    transition: fill 0.3s ease, transform 0.3s ease;
+}
+
+.social-link--bluesky:hover svg {
+    fill: var(--primary-color);
+    transform: scale(1.1);
 }
 
 /* === HAVA DURUMU === */
@@ -636,86 +686,146 @@ header {
 .weather-location {
     font-size: 1.1rem;
     color: #194d77;
-    margin-top: -0.5rem; /* Pushes it to the bottom */
+    margin-top: -0.5rem; 
     font-weight: 800;
     letter-spacing: 2.5px;
     position: relative;
 }
 
-/* styles.css */
 .black-text {
     color: black;
   }
-  
+.mobile-nav {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 140px;
+    right: 0;
+    background-color: rgb(253, 250, 252);
+    width: 430px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.mobile-nav.show {
+    display: flex;
+}
+
+.hamburger-menu {
+    display: none;
+    cursor: pointer;
+}
+
+.hamburger-icon {
+    font-size: 30px;
+    color: #000;
+}
+.mobile-nav a {
+    text-decoration: none;
+    color: #333; 
+    padding: 15px 20px;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: left; 
+    transition: background-color 0.3s ease;
+    border-bottom: 1px solid #eee; 
+}
 
 /* === RESPONSIVE === */
 @media (max-width: 1200px) {
-    header, main, footer {
+    header, main {
         padding: 2rem 4rem;
+    }
+    .slider-container {
+        height: 500px;
     }
 }
 
+/* Responsive Tasarım */
 @media (max-width: 992px) {
-    .slide-content {
-        padding: 2rem;
+    .slider-container {
+        height: 450px;
     }
+
+    .slide-content {
+        padding: 1.5rem;
+    }
+
     .slide-content h3 {
-        font-size: 2rem;
+        font-size: 1.5rem;
+    }
+
+    .news-info {
+        font-size: 0.9rem;
     }
 }
 
 @media (max-width: 768px) {
-    header, main, footer {
-        padding: 2rem;
+    .flex.jc-even,
+    .flex.ai-stretch {
+        flex-direction: column !important;
+        gap: 20px;
+        align-items: stretch;
     }
 
-    .flex.jc-even {
+    .slider-container,
+    .gundem-container {
+        width: 100% !important;
+        flex: none !important;
+        height: auto !important;
+       
+    }
+    
+    .categories-container {
+        margin-top: clamp(15rem, 120vh, 65rem);
+    }
+    .main-nav {
+        display: none;
+    }
+    .hamburger-menu {
+        display: block; /* Hamburger menüyü göster */
+    }
+
+    .gundem-grid {
+        display: flex;
         flex-direction: column;
-    }
-
-    .slide-content h3 {
-        font-size: 1.8rem;
-    }
-
-    .news-info {
-        flex-direction: column;
-        gap: 0.5rem;
+        gap: 20px;
     }
 
     .gundem-card {
         flex-direction: column;
+        height: auto;
     }
 
     .gundem-card img {
         width: 100%;
-        height: 150px;
-        margin-right: 0;
-        margin-bottom: 1rem;
+        height: auto;
+    }
+
+    .card-content {
+        width: 100%;
     }
 }
 
+/* Telefonlar İçin */
 @media (max-width: 480px) {
-    header {
-        flex-direction: column;
-        gap: 1rem;
-        padding: 1.5rem;
-    }
-
-    .main-nav {
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-
-    .slide-content {
-        padding: 1.5rem;
+    .slider-container {
+        height: 300px;
+        margin-bottom: 15px; /* Gündem kısmı ile araya boşluk ekliyoruz */
     }
 
     .slide-content h3 {
-        font-size: 1.6rem;
+        font-size: 1.2rem;
     }
 
-    .gundem-title {
-        font-size: 1.8rem;
-        padding: 1rem 1.5rem;
+    .gundem-grid {
+        grid-template-columns: 1fr; /* Kartları alt alta diziyoruz */
+    }
+
+    .gundem-card h3 {
+        font-size: 1.1rem;
+    }
+
+    .news-meta {
+        font-size: 0.8rem;
     }
 }
