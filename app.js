@@ -3,9 +3,9 @@ const expressLayout = require("express-ejs-layouts");
 const methodOverride = require("method-override");
 var compression = require('compression')
 var helmet = require('helmet')
-const { connectDB, News } = require("./services/mongoService");  // MongoDB servisini içe aktar
+const { connectDB, News,getPaginatedNewsByCategory } = require("./services/mongoService");  // MongoDB servisini içe aktar
 const { getWeatherData } = require("./services/weatherService");  // Hava durumu servisini içe aktar
-
+const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 7000;
 
@@ -16,6 +16,10 @@ connectDB();
 app.use(express.static("public"));
 app.use(methodOverride("_method"));
 app.use(expressLayout);
+app.set('views', [
+    path.join(__dirname, 'views'),
+    path.join(__dirname, 'views/partials')
+]);
 app.set("layout", "./layouts/main");
 app.set("view engine", "ejs");
 require("dotenv").config();
@@ -67,6 +71,26 @@ app.get("/", async (req, res) => {
         });
     }
 });
+
+
+
+
+app.get("/:categoryName", async (req, res) => {
+    const newsItems = await getPaginatedNewsByCategory(req.params.categoryName);
+    console.log(newsItems);
+    
+    console.log(path.join(__dirname, 'views', 'partials', 'pagination.ejs'));  // Yolun doğru olup olmadığını kontrol et
+
+    res.render("category",{newsItems});
+});
+
+app.get("/:categoryName/:pageNumber", async (req, res) => {
+
+    const newsItems = await getPaginatedNewsByCategory(req.params.categoryName,req.params.pageNumber);
+    console.log(newsItems);
+    res.render("category",{newsItems});
+});
+  
 
 app.listen(PORT, () => {
     console.log(`App Listening on : ${PORT}`);
