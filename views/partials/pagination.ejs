@@ -1,0 +1,15 @@
+<nav class="pagination">
+  <% if (newsItems.totalPages> 1) { %>
+    <ul>
+      <% if (newsItems.page> 1) { %>
+        <li><a href="/<%=newsItems.category%>/<%= parseInt(newsItems.page) - 1 %>">Önceki</a></li>
+        <% } %>
+          <li>
+            <%=newsItems.page%>
+          </li>
+          <% if (newsItems.page < newsItems.totalPages) { %>
+            <li><a href="/<%=newsItems.category%>/<%= parseInt(newsItems.page) + 1 %>">Sonraki</a></li>
+            <% } %>
+    </ul>
+    <% } %>
+</nav>
