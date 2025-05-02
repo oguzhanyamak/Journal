@@ -1,15 +1,29 @@
-<nav class="pagination">
-  <% if (newsItems.totalPages> 1) { %>
-    <ul>
-      <% if (newsItems.page> 1) { %>
-        <li><a href="/<%=newsItems.category%>/<%= parseInt(newsItems.page) - 1 %>">Önceki</a></li>
-        <% } %>
-          <li>
-            <%=newsItems.page%>
-          </li>
-          <% if (newsItems.page < newsItems.totalPages) { %>
-            <li><a href="/<%=newsItems.category%>/<%= parseInt(newsItems.page) + 1 %>">Sonraki</a></li>
-            <% } %>
-    </ul>
-    <% } %>
+<nav class="pagination-container">
+  <% if (newsItems.totalPages > 1) { %>
+    <div class="pagination">
+      <% if (newsItems.page > 1) { %>
+        <a href="/<%=newsItems.category%>/<%= parseInt(newsItems.page) - 1 %>" class="pagination-button prev">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span>Önceki</span>
+        </a>
+      <% } %>
+
+      <div class="page-info">
+        <span class="current-page"><%=newsItems.page%></span>
+        <span class="page-separator">/</span>
+        <span class="total-pages"><%=newsItems.totalPages%></span>
+      </div>
+
+      <% if (newsItems.page < newsItems.totalPages) { %>
+        <a href="/<%=newsItems.category%>/<%= parseInt(newsItems.page) + 1 %>" class="pagination-button next">
+          <span>Sonraki</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      <% } %>
+    </div>
+  <% } %>
 </nav>

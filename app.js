@@ -38,11 +38,11 @@ app.use(compression())
 // Kategori ve haber sayıları
 const categoryLimits = {
     'SonDakika': 10,
-    'Gündem':3,
-    'Ekonomi': 3,
-    'Otomobil': 3,
-    'Spor': 3,
-    'Dünya': 3
+    'Gündem':6,
+    'Ekonomi': 6,
+    'Otomobil': 6,
+    'Spor': 6,
+    'Dünya': 6
 };
 
 // Ana sayfa - Kategorilere göre haberleri getir
