@@ -39,10 +39,10 @@ app.use(compression())
 const categoryLimits = {
     'SonDakika': 10,
     'Gündem':3,
-    'Ekonomi': 4,
-    'Otomobil': 4,
-    'Spor': 4,
-    'Dünya': 4
+    'Ekonomi': 6,
+    'Otomobil': 6,
+    'Spor': 6,
+    'Dünya': 6
 };
 
 // Ana sayfa - Kategorilere göre haberleri getir

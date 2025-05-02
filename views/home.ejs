@@ -41,7 +41,7 @@
                 <div class="gundem-grid">
                     <% categories.forEach(([category, newsList])=> { %>
                         <% if (category==="Gündem" ) { %>
-                            <% newsList.slice(0, 3).forEach(newsItem=> { %> <!-- Show only 3 items -->
+                            <% newsList.slice(0, 3).forEach(newsItem=> { %>
                                 <article class="gundem-card">
 
                                     <img class="news-image" src="<%= newsItem.image_url%>" alt="<%= newsItem.title %>"
@@ -51,13 +51,13 @@
                                             <%= newsItem.title %>
                                         </h3>
                                         <div class="news-meta">
-                                            <span>
+                                            <h5>
                                                 <%= newsItem.provider || "Bilinmiyor" %>
-                                            </span>
-                                            <span>•</span>
-                                            <span>
+                                            </h5>
+                                            <h5>•</h5>
+                                            <h5>
                                                 <%= new Date(newsItem.published_dt).toLocaleDateString() %>
-                                            </span>
+                                            </h5>
                                         </div>
                                     </div>
                                 </article>
