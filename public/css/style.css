@@ -399,6 +399,7 @@ header {
     color: white;
     background: var(--primary-color);
     transition: transform 0.2s ease;
+    text-decoration: none;
 }
 .social-link:hover {
     transform: scale(1.1);
