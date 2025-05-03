@@ -1,15 +1,36 @@
-<nav class="pagination">
-  <% if (newsItems.totalPages> 1) { %>
-    <ul>
-      <% if (newsItems.page> 1) { %>
-        <li><a href="/<%=newsItems.category%>/<%= parseInt(newsItems.page) - 1 %>">Önceki</a></li>
-        <% } %>
-          <li>
-            <%=newsItems.page%>
-          </li>
-          <% if (newsItems.page < newsItems.totalPages) { %>
-            <li><a href="/<%=newsItems.category%>/<%= parseInt(newsItems.page) + 1 %>">Sonraki</a></li>
-            <% } %>
-    </ul>
-    <% } %>
+<nav class="pagination-container">
+  <% if (newsItems.totalPages > 1) { %>
+    <div class="pagination">
+      <% if (newsItems.page > 1) { %>
+        <a href="/<%=newsItems.category%>/<%= parseInt(newsItems.page) - 1 %>" class="pagination-button prev">
+          <img src="/images/left.svg" alt="">
+          <svg width="16" height="16" ...>...</svg>
+          
+        </a>
+      <% } else { %>
+        <span class="pagination-button prev disabled">
+          <img src="/images/left.svg" alt="">
+          <svg width="16" height="16" ...>...</svg>
+        </span>
+      <% } %>
+
+      <div class="page-info">
+        <span class="current-page"><%=newsItems.page%></span>
+        <span class="page-separator">/</span>
+        <span class="total-pages"><%=newsItems.totalPages%></span>
+      </div>
+
+      <% if (newsItems.page < newsItems.totalPages) { %>
+        <a href="/<%=newsItems.category%>/<%= parseInt(newsItems.page) + 1 %>" class="pagination-button next">
+          <img src="/images/right.svg" alt="">
+          <svg width="16" height="16" ...>...</svg>
+        </a>
+      <% } else { %>
+        <span class="pagination-button next disabled">
+          <img src="/images/right.svg" alt="">
+          <svg width="16" height="16" ...>...</svg>
+        </span>
+      <% } %>
+    </div>
+  <% } %>
 </nav>
