@@ -4,7 +4,6 @@ const methodOverride = require("method-override");
 var compression = require('compression')
 var helmet = require('helmet')
 const { connectDB, News,getPaginatedNewsByCategory } = require("./services/mongoService");  // MongoDB servisini içe aktar
-const { getWeatherData } = require("./services/weatherService");  // Hava durumu servisini içe aktar
 const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 7000;
@@ -48,8 +47,6 @@ const categoryLimits = {
 // Ana sayfa - Kategorilere göre haberleri getir
 app.get("/", async (req, res) => {
     try {
-        const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
-        const weatherData = await getWeatherData(ip);
         // Kategorize edilmiş haberleri çekmek için MongoDB servisini kullanıyoruz
         const categorizedNews = {};
         const categoryPromises = Object.entries(categoryLimits).map(async ([category, limit]) => {
@@ -60,7 +57,7 @@ app.get("/", async (req, res) => {
         });
         await Promise.all(categoryPromises);
 
-        res.render("home", { categorizedNews, weatherData });
+        res.render("home", { categorizedNews});
 
     } catch (error) {
         console.error("Ana sayfa yüklenirken hata:", error);

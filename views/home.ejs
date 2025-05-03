@@ -72,8 +72,8 @@
     <div class="categories-container">
         <% categories.forEach(([category, newsList])=> { %>
             <% if (category !=="SonDakika" && category !=="Gündem" ) { %>
-                <section class="category-section">
-                    <div class="section-header mt-4">
+                <section class="category-section" >
+                    <div class="section-header mt-4" id="<%=category%>">
                         <h2 class="category-title">
                             <%= category %>
                         </h2>
@@ -98,10 +98,10 @@
                                             </span>
                                         </div>
                                         <h3>
-                                            <%= newsItem.title %>
+                                            <%= (newsItem.title || "Açıklama yok." ).substring(0, 50) + " ..." %>
                                         </h3>
                                         <p>
-                                            <%= (newsItem.content || "Açıklama yok." ).substring(0, 100) + "..." %>
+                                            <%= (newsItem.content || "Açıklama yok." ).substring(0, 100) + " ..." %>
                                         </p>
                                 
                                     </div>
