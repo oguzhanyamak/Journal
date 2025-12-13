@@ -1,4 +1,5 @@
 const express = require("express");
+require("dotenv").config();
 const expressLayout = require("express-ejs-layouts");
 const methodOverride = require("method-override");
 const compression = require('compression');
@@ -14,7 +15,7 @@ const PORT = process.env.PORT || 7000;
 // Rate Limiting (15 dakikada maksimum 100 istek)
 const limiter = rateLimit({
     windowMs: 15 * 60 * 1000,
-    max: 10, // Prod için 100, Test için 3-5 yapabilirsiniz
+    max: process.env.RATE_LIMIT_MAX || 100, // Prod için 100, Test için 3-5 yapabilirsiniz
     standardHeaders: true,
     legacyHeaders: false,
     handler: (req, res, next, options) => {
@@ -38,7 +39,7 @@ app.set('views', [
 ]);
 app.set("layout", "./layouts/main");
 app.set("view engine", "ejs");
-require("dotenv").config();
+
 
 app.use(
     helmet.contentSecurityPolicy({
