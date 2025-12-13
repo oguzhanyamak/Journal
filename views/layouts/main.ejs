@@ -1,9 +1,15 @@
 <!DOCTYPE html>
 <html lang="tr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Malumath</title>
+    <title>
+        <%= typeof title !=='undefined' ? title : 'Malumath - Güncel Haberler' %>
+    </title>
+    <meta name="description"
+        content="<%= typeof description !== 'undefined' ? description : 'Türkiye\'den ve dünyadan en güncel haberler, son dakika gelişmeleri Malumath\'ta.' %>">
+    <meta name="keywords" content="haber, son dakika, gündem, ekonomi, spor, dünya, malumath">
     <link rel="icon" type="image/png" href="images/favicon2.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,14 +17,16 @@
         rel="stylesheet">
     <link rel="stylesheet" href="/css/style.css">
 </head>
+
 <body>
     <%- include('../partials/header.ejs')%>
-    <main>
-        <%- body %>
-    </main>
-    <%- include('../partials/footer.ejs')%>
-    <script src="/js/index.js"></script>
+        <main>
+            <%- body %>
+        </main>
+        <%- include('../partials/footer.ejs')%>
+            <script src="/js/index.js"></script>
 </body>
+
 </html>
 
 <!-- -->

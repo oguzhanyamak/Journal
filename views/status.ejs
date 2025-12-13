@@ -1,0 +1,261 @@
+<style>
+    .dashboard-container {
+        max-width: 1200px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+    }
+
+    .dashboard-header {
+        margin-bottom: 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        padding-bottom: 1rem;
+    }
+
+    .dashboard-title {
+        font-size: 2rem;
+        color: #2c3e50;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .dashboard-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.5rem;
+    }
+
+    .stat-card {
+        background: white;
+        border-radius: 16px;
+        padding: 1.5rem;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        border: 1px solid rgba(0, 0, 0, 0.05);
+        transition: transform 0.3s ease;
+    }
+
+    .stat-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    .stat-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+    }
+
+    .stat-title {
+        font-size: 1.1rem;
+        color: #64748b;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .stat-icon {
+        font-size: 1.5rem;
+        color: #BA0F0D;
+        background: rgba(186, 15, 13, 0.1);
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px;
+    }
+
+    .stat-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px dashed rgba(0, 0, 0, 0.1);
+    }
+
+    .stat-row:last-child {
+        border-bottom: none;
+        margin-bottom: 0;
+        padding-bottom: 0;
+    }
+
+    .stat-label {
+        color: #475569;
+        font-weight: 500;
+    }
+
+    .stat-value {
+        color: #0f172a;
+        font-weight: 700;
+        font-size: 1.1rem;
+    }
+
+    .progress-bar {
+        width: 100%;
+        height: 8px;
+        background: #e2e8f0;
+        border-radius: 4px;
+        overflow: hidden;
+        margin-top: 0.5rem;
+    }
+
+    .progress-fill {
+        height: 100%;
+        background: linear-gradient(90deg, #BA0F0D, #ff4757);
+        border-radius: 4px;
+        transition: width 0.5s ease;
+    }
+
+    .key-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-top: 1rem;
+    }
+
+    .key-tag {
+        background: #f1f5f9;
+        color: #475569;
+        padding: 4px 10px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 500;
+    }
+
+    .refresh-btn {
+        background: #0f172a;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 0.9rem;
+        transition: opacity 0.3s;
+    }
+
+    .back-btn {
+        text-decoration: none;
+        background-color: #BA0F0D;
+        color: white;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.6rem 1.2rem;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 6px rgba(186, 15, 13, 0.2);
+    }
+
+    .back-btn:hover {
+        background-color: #990b09;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 12px rgba(186, 15, 13, 0.3);
+        color: white;
+    }
+</style>
+
+<div class="dashboard-container">
+    <div class="dashboard-header">
+        <div class="dashboard-title">
+            <i class="fas fa-chart-line" style="color: #BA0F0D;"></i>
+            Sistem Paneli
+        </div>
+    </div>
+
+    <div class="dashboard-grid">
+        <!-- Sunucu Kartı -->
+        <div class="stat-card">
+            <div class="stat-header">
+                <span class="stat-title">Sunucu Durumu</span>
+                <div class="stat-icon"><i class="fas fa-server"></i></div>
+            </div>
+
+            <div class="stat-row">
+                <span class="stat-label">Platform</span>
+                <span class="stat-value">
+                    <%= systemInfo.platform.toUpperCase() %>
+                </span>
+            </div>
+            <div class="stat-row">
+                <span class="stat-label">Uptime</span>
+                <span class="stat-value">
+                    <%= systemInfo.uptime %>
+                </span>
+            </div>
+
+            <div style="margin-top: 1.5rem;">
+                <div class="flex jc-between mb-1" style="font-size: 0.9rem; color: #475569;">
+                    <span>RAM Kullanımı</span>
+                    <strong>%<%= systemInfo.memUsage %></strong>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: <%= systemInfo.memUsage + '%' %>;"></div>
+                </div>
+                <div class="flex jc-between mt-2" style="font-size: 0.8rem; color: #94a3b8;">
+                    <span>
+                        <%= systemInfo.freemem %> Boş
+                    </span>
+                    <span>
+                        <%= systemInfo.totalmem %> Toplam
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cache Kartı -->
+        <div class="stat-card">
+            <div class="stat-header">
+                <span class="stat-title">Cache Performansı</span>
+                <div class="stat-icon"><i class="fas fa-bolt"></i></div>
+            </div>
+
+            <div class="stat-row">
+                <span class="stat-label">Toplam Veri</span>
+                <span class="stat-value">
+                    <%= keys.length %> Adet
+                </span>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem;">
+                <div style="background: #ecfdf5; padding: 10px; border-radius: 8px; text-align: center;">
+                    <div style="color: #059669; font-size: 0.8rem; font-weight: 600;">İSABET (HIT)</div>
+                    <div style="color: #059669; font-size: 1.5rem; font-weight: 700;">
+                        <%= stats.hits %>
+                    </div>
+                </div>
+                <div style="background: #fef2f2; padding: 10px; border-radius: 8px; text-align: center;">
+                    <div style="color: #dc2626; font-size: 0.8rem; font-weight: 600;">ISKALAMA (MISS)</div>
+                    <div style="color: #dc2626; font-size: 1.5rem; font-weight: 700;">
+                        <%= stats.misses %>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 1.5rem;">
+                <div style="font-size: 0.9rem; color: #64748b; margin-bottom: 0.5rem;">Aktif Anahtarlar:</div>
+                <div class="key-list">
+                    <% if(keys.length> 0) { %>
+                        <% keys.forEach(key=> { %>
+                            <span class="key-tag">
+                                <%= key %>
+                            </span>
+                            <% }) %>
+                                <% } else { %>
+                                    <span class="key-tag">Boş</span>
+                                    <% } %>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div style="display: flex; justify-content: center; margin-top: 30px;">
+        <a href="/" class="back-btn"><i class="fas fa-arrow-left"></i> Siteye Dön</a>
+    </div>
+</div>

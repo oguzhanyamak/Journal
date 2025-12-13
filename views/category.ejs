@@ -1,8 +1,7 @@
-
 <div class="section-header mt-1">
     <h2 class="category-title">
-        <%= newsItems.data[0].category %>
-    </h2>   
+        <%= newsItems.category.charAt(0).toUpperCase() + newsItems.category.slice(1) %>
+    </h2>
 </div>
 <div class="news-grid1">
     <% newsItems.data.forEach(newsItem=> { %>
@@ -11,7 +10,7 @@
             <a class="bridge" href="<%= newsItem.link %>" target="_blank">
                 <img class="news-image" src="<%= newsItem.image_url%>" alt="<%= newsItem.title %>"
                     data-category="<%= newsItem.category %>">
-                
+
                 <div class="card-content1">
                     <div class="news-meta">
                         <span>

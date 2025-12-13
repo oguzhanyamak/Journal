@@ -11,7 +11,7 @@ function showSlide(index) {
     } else {
         currentSlide = index;
     }
-    
+
     const offset = -currentSlide * 100;
     carousel.style.transform = `translateX(${offset}%)`;
 }
@@ -36,8 +36,35 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 document.querySelectorAll('.news-image').forEach(img => {
-    img.onerror = function() {
+    img.onerror = function () {
         const category = this.getAttribute('data-category'); // 'data-category' değerini alıyoruz
         this.src = '/images/' + category + '.png';
     };
+});
+
+// Mobile Menu Logic
+const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+const closeMenuBtn = document.querySelector('.close-btn');
+const mobileMenu = document.querySelector('.mobile-menu');
+
+if (mobileMenuBtn && mobileMenu) {
+    mobileMenuBtn.addEventListener('click', () => {
+        mobileMenu.classList.add('active');
+        document.body.style.overflow = 'hidden'; // Prevent scrolling
+    });
+}
+
+if (closeMenuBtn && mobileMenu) {
+    closeMenuBtn.addEventListener('click', () => {
+        mobileMenu.classList.remove('active');
+        document.body.style.overflow = 'auto';
+    });
+}
+
+// Close menu when clicking outside links (optional but good UX)
+document.querySelectorAll('.mobile-menu-link').forEach(link => {
+    link.addEventListener('click', () => {
+        mobileMenu.classList.remove('active');
+        document.body.style.overflow = 'auto';
+    });
 });

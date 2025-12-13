@@ -1,13 +1,30 @@
 const express = require("express");
 const expressLayout = require("express-ejs-layouts");
 const methodOverride = require("method-override");
-var compression = require('compression')
-var helmet = require('helmet')
-const { connectDB, News,getPaginatedNewsByCategory } = require("./services/mongoService");  // MongoDB servisini içe aktar
+const compression = require('compression');
+const helmet = require('helmet');
 const path = require('path');
+const connectDB = require('./config/db'); // Yeni DB bağlantısı
+const newsRoutes = require('./routes/newsRoutes'); // Yeni Rotalar
+const rateLimit = require('express-rate-limit');
+
 const app = express();
 const PORT = process.env.PORT || 7000;
 
+// Rate Limiting (15 dakikada maksimum 100 istek)
+const limiter = rateLimit({
+    windowMs: 15 * 60 * 1000,
+    max: 10, // Prod için 100, Test için 3-5 yapabilirsiniz
+    standardHeaders: true,
+    legacyHeaders: false,
+    handler: (req, res, next, options) => {
+        res.status(options.statusCode).render("429", {
+            layout: "./layouts/main", // Ana layout içinde göster
+            title: "Çok Fazla İstek"
+        });
+    }
+});
+app.use(limiter);
 
 // MongoDB bağlantısı
 connectDB();
@@ -22,72 +39,20 @@ app.set('views', [
 app.set("layout", "./layouts/main");
 app.set("view engine", "ejs");
 require("dotenv").config();
+
 app.use(
     helmet.contentSecurityPolicy({
-      directives: {
-        defaultSrc: ["'self'"],  // Varsayılan olarak yalnızca aynı kaynak
-        imgSrc: ["*"],  // Tüm kaynaklardan resim yüklemeye izin ver
-        // Diğer direktifler...
-      }
+        directives: {
+            defaultSrc: ["'self'"],
+            imgSrc: ["*"],
+            // Diğer direktifler...
+        }
     })
-  );
-app.use(compression())
+);
+app.use(compression());
 
-
-// Kategori ve haber sayıları
-const categoryLimits = {
-    'SonDakika': 10,
-    'Gündem':6,
-    'Ekonomi': 6,
-    'Otomobil': 6,
-    'Spor': 6,
-    'Dünya': 6
-};
-
-// Ana sayfa - Kategorilere göre haberleri getir
-app.get("/", async (req, res) => {
-    try {
-        // Kategorize edilmiş haberleri çekmek için MongoDB servisini kullanıyoruz
-        const categorizedNews = {};
-        const categoryPromises = Object.entries(categoryLimits).map(async ([category, limit]) => {
-            const news = await News.find({ category })
-                .sort({ published_dt: -1 })
-                .limit(limit);
-            categorizedNews[category] = news;
-        });
-        await Promise.all(categoryPromises);
-
-        res.render("home", { categorizedNews});
-
-    } catch (error) {
-        console.error("Ana sayfa yüklenirken hata:", error);
-        res.render("home", { 
-            categorizedNews: {},
-            weatherInfo: null,
-            error: "Sayfa yüklenirken bir hata oluştu."
-        });
-    }
-});
-
-
-
-
-app.get("/:categoryName", async (req, res) => {
-    const newsItems = await getPaginatedNewsByCategory(req.params.categoryName);
-    console.log(newsItems);
-    
-    console.log(path.join(__dirname, 'views', 'partials', 'pagination.ejs'));  // Yolun doğru olup olmadığını kontrol et
-
-    res.render("category",{newsItems});
-});
-
-app.get("/:categoryName/:pageNumber", async (req, res) => {
-
-    const newsItems = await getPaginatedNewsByCategory(req.params.categoryName,req.params.pageNumber);
-    console.log(newsItems);
-    res.render("category",{newsItems});
-});
-  
+// Rotalar
+app.use('/', newsRoutes);
 
 app.listen(PORT, () => {
     console.log(`App Listening on : ${PORT}`);
