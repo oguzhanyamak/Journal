@@ -4,7 +4,7 @@
 
 **Malumath**, modern web teknolojileri ile geliştirilmiş, yüksek performanslı ve kullanıcı dostu bir haber platformudur. Gündem, Ekonomi, Spor, Dünya ve Teknoloji gibi kategorilerde en güncel içerikleri hızlı ve güvenilir bir şekilde sunar.
 
-🌐 **Canlı Demo:** [www.malumath.com](http://www.malumath.com)
+🌐 **Canlı Demo:** [www.malumath.com](https://malumath.onrender.com/)
 
 ---
 
